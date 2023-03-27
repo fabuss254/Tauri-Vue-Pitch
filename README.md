@@ -1,1 +1,1 @@
-TODO: Make a README :p
+TODO: Write a README :p
