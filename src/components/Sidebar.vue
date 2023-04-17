@@ -5,20 +5,17 @@ import Delimiter from "./sub/SidebarDelimiter.vue"
 
 <template>
     <div class="bar">
-        <!--<div>-->
-            <Btn btnName="Home" btnIcon="home"/>
-            <Btn btnName="Installed" btnIcon="backpack"/>
-            <Delimiter />
-            <Btn btnName="Browse" btnIcon="search"/>
-            <Btn btnName="Shop" btnIcon="store"/>
-            <Delimiter />
-            <Btn btnName="Settings" btnIcon="settings"/>
-            <Btn btnName="Profile" btnIcon="person"/>
-            <Btn btnName="Logout" btnIcon="logout"/>
-            <Delimiter />
-            <Btn btnName="About" btnIcon="info"/>
-            
-        <!--</div>-->
+        <Btn btnName="Home" btnIcon="home"/>
+        <Btn btnName="Installed" btnIcon="backpack"/>
+        <Delimiter />
+        <Btn btnName="Browse" btnIcon="search"/>
+        <Btn btnName="Shop" btnIcon="store"/>
+        <Delimiter />
+        <Btn btnName="Settings" btnIcon="settings"/>
+        <Btn btnName="Profile" btnIcon="person"/>
+        <Btn btnName="Logout" btnIcon="logout"/>
+        <Delimiter />
+        <Btn btnName="About" btnIcon="info"/>
     </div>
 </template>
 
