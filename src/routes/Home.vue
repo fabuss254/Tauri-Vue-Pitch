@@ -100,7 +100,7 @@ header {
     height: 100%;
     background-color: #F5F5F5;
 
-    padding: 0 10px;
+    padding: 0 0px;
     overflow-x: hidden;
     position: relative;
 }
