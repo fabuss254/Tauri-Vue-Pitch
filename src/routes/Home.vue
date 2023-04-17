@@ -2,7 +2,6 @@
 import Sidebar from "./../components/Sidebar.vue"
 import CardRowContainer from "./../components/sub/Items/CardRowContainer.vue"
 import axios from "axios"
-import xml2js from 'xml2js';
 </script>
 
 <template>
@@ -14,11 +13,11 @@ import xml2js from 'xml2js';
             </header>
             <div class="content"> <!-- CONTENT -->
                 <CardRowContainer 
-                    :Items="featured.filter((item) => item.price == '$0.00')"
+                    :Items="productList.filter((item) => item.price == '$0.00')"
                     CtnName="Free" 
                 />
                 <CardRowContainer 
-                    :Items="featured.filter((item) => item.price != '$0.00')"
+                    :Items="productList.filter((item) => item.price != '$0.00')"
                     CtnName="Paid" 
                 />
                 <CardRowContainer 
@@ -38,23 +37,23 @@ export default {
     props: {},
     data() {
         return {
-            featured: [],
+            productList: [],
         }
     },
     computed: {},
     async mounted() {
         // TODO: Define a type for search's returns
-        let res = await axios.get('https://itch.io/tools/tag-roblox-studio-plugin.xml', {
+        const res = await axios.get('https://itch.io/tools/tag-roblox-studio-plugin.xml', {
                 responseType: "text",
         })
             
-        let collection = new DOMParser().parseFromString(res.data, "text/xml")
-        Array.from(collection.getElementsByTagName("item")).forEach((item) => {
+        const collection = new DOMParser().parseFromString(res.data, "text/xml")
+        this.productList = Array.from(collection.getElementsByTagName("item")).map((rawItem) => {
             let tbl = {}
-            for (let child of item.children){
+            for (let child of rawItem.children){
                 tbl[child.tagName] = child.textContent
             }
-            this.featured.push(tbl);
+            return tbl
         })
     },
     methods: {
