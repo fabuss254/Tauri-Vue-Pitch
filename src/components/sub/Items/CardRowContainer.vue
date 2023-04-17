@@ -11,9 +11,9 @@ import ItemCard from "./ItemCard.vue"
                     <material-icon name="arrow_left" filled round size="24"/>
                 </div>
                 <div class="content-overflow">
-                    <div class="content">
-                        <ItemCard :Item="item" v-for="item of Items" />
-                    </div>
+                    <ul ref="content" class="content" :style="{transform: 'translateX(' + offsetX + 'px)'}">
+                        <li v-for="item of Items"><ItemCard :Item="item" /></li>
+                    </ul>
                 </div>
                 <div class="control right" v-on:click="right()">
                     <material-icon name="arrow_right" filled round size="24"/>
@@ -41,18 +41,28 @@ export default {
     },
     data() {
         return {
-            offsetx: 0,
+            offsetX: 0,
         }
     },
     computed: {},
     mounted() {
     },
     methods: {
+        getIncrement() {
+            return this.$refs.content.children[0].offsetWidth * 2;
+        },
+        roundToNearest(num: number, nearest: number | null | undefined) {
+            nearest = nearest || this.$refs.content.children[0].offsetWidth + 10;
+            return Math.round(num / nearest) * nearest;
+        },
         right() {
-
+            this.updateElement(-1);
         },
         left() {
-
+            this.updateElement(1);
+        },
+        updateElement(multiplier: number) {
+            this.offsetX = Math.min(Math.max(this.roundToNearest(this.offsetX + this.getIncrement() * multiplier), -this.$refs.content.offsetWidth + this.$refs.content.parentElement.offsetWidth), 0);
         }
     }
 }
@@ -61,6 +71,8 @@ export default {
 <style scoped>
 .Container {
     margin: 0;padding: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 a {
@@ -96,10 +108,15 @@ a:hover > h2 > i {
 .content-overflow {
     /*width: 100%;*/
     height: 100%;
+
+    overflow-x: hidden;
 }
 
 .content {
-    display: -webkit-inline-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
     gap: 10px;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -108,6 +125,9 @@ a:hover > h2 > i {
     margin: 0;
     padding: 16px 10px;
     position: relative;
+    width: fit-content;
+
+    transition: transform 0.3s ease-out;
 
     /*max-height: 150px;*/
 }
@@ -115,10 +135,9 @@ a:hover > h2 > i {
 .content-ctn {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
 
-    align-items: stretch;
     position: relative;
     width: 100%;
     height: 100%;
@@ -127,7 +146,7 @@ a:hover > h2 > i {
 }
 
 .control {
-    height: 100%;
+    /*height: 100%;*/
     width: 30px;
     background-color: rgb(0, 0, 0);
     flex: 0 0;
@@ -142,6 +161,9 @@ a:hover > h2 > i {
     color: white;
     opacity: .2;
     z-index: 50;
+
+    cursor: pointer;
+    user-select: none;
 }
 
 .control > i {
