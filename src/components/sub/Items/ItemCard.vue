@@ -12,7 +12,7 @@
 
         <div class="bg-img" v-bind:style="{ 'background-image': 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.5)), url(' + Item.imageurl + ')' }"></div>
         <div class="info-ctn">
-            <p class="desc">{{ Item.description }}</p>
+            <p class="desc">{{ Item.description.split(/<\/?[^>]+>/)[0] }}</p>
             <p class="author"><b>{{ Item.guid.match(/https:\/\/(.+)\.itch\.io/)[1] }}</b></p>
         </div>
     </div>
@@ -33,7 +33,7 @@ export default {
     },
     computed: {},
     mounted() {
-        
+
     },
     methods: {
     }
@@ -117,7 +117,13 @@ h1 {
     text-align: left;
 
     width: 100%;
-    height: 50px;
+    height: 40px;
+
+    display: -webkit-box;
+    word-wrap: break-word;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     /*background-color: red;*/
 }
