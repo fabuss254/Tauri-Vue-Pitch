@@ -51,8 +51,8 @@ export default {
         getIncrement() {
             return this.$refs.content.children[0].offsetWidth * 2;
         },
-        roundToNearest(num: number, nearest: number | null | undefined) {
-            nearest = nearest || this.$refs.content.children[0].offsetWidth + 10;
+        roundToNearest(num: number, rawNearest: number | null | undefined) {
+            let nearest = rawNearest || this.$refs.content.children[0].offsetWidth + 10;
             return Math.round(num / nearest) * nearest;
         },
         right() {
