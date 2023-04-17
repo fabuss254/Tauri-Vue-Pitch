@@ -6,7 +6,7 @@ import ItemCard from "./ItemCard.vue"
     <section class="Container">
         <div>
             <a><h2>{{ CtnName }}<material-icon name="arrow_right" filled round size="24"/></h2></a>
-            <div class="content-ctn">
+            <div class="content-ctn" v-if="Items.length > 0">
                 <div class="control left" v-on:click="left()">
                     <material-icon name="arrow_left" filled round size="24"/>
                 </div>
@@ -18,6 +18,9 @@ import ItemCard from "./ItemCard.vue"
                 <div class="control right" v-on:click="right()">
                     <material-icon name="arrow_right" filled round size="24"/>
                 </div>
+            </div>
+            <div class="no-content" v-else>
+                Nothing to show here :(
             </div>
         </div>
     </section>
@@ -182,5 +185,21 @@ a:hover > h2 > i {
 .right {
     right: 20px;
     border-radius: 20px 0 0 20px;
+}
+
+.no-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    width: 100%;
+
+    font-size: 1.8em;
+    color: #888;
+    background-color: rgba(0, 0, 0, 0.1);
+
+    padding: 60px 0;
 }
 </style>

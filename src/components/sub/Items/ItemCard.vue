@@ -60,6 +60,8 @@ export default {
 
     overflow: hidden;
     position: relative;
+
+    user-select: none;
     cursor: pointer;
 
     transition: all 0.1s cubic-bezier(0.41, 0.64, 0.6, 1.8);

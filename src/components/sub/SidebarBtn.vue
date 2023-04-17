@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="btn">
+    <div class="btn" v-on:click="redirect(this.link)">
         <material-icon :name="btnIcon" filled round size="24"/>
         <p>{{ btnName }}</p>
 
@@ -28,6 +28,10 @@ export default {
         IconWeight: {
             type: Number,
             default: 400,
+        },
+        link: {
+            type: String,
+            default: "/",
         }
     },
     data() {
@@ -37,6 +41,9 @@ export default {
     mounted() {
     },
     methods: {
+        redirect(link: string) {
+            this.$router.push(link)
+        }
     }
 }
 </script>

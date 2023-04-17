@@ -5,10 +5,10 @@ import Delimiter from "./sub/SidebarDelimiter.vue"
 
 <template>
     <div class="bar">
-        <Btn btnName="Home" btnIcon="home"/>
+        <Btn btnName="Home" btnIcon="home" link="/"/>
         <Btn btnName="Installed" btnIcon="backpack"/>
         <Delimiter />
-        <Btn btnName="Browse" btnIcon="search"/>
+        <Btn btnName="Browse" btnIcon="search" link="/browse"/>
         <Btn btnName="Shop" btnIcon="store"/>
         <Delimiter />
         <Btn btnName="Settings" btnIcon="settings"/>
@@ -46,6 +46,12 @@ import Delimiter from "./sub/SidebarDelimiter.vue"
 
 .bar:hover {
     width: 150px;
+}
+
+@media only screen and (min-width: 1000px) {
+    .bar {
+        width: 150px;
+    }
 }
 
 /*
