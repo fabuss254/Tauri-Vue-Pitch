@@ -2,6 +2,7 @@
 import Sidebar from "./../components/Sidebar.vue"
 import CardRowContainer from "./../components/sub/Items/CardRowContainer.vue"
 import axios from "axios"
+import itch from "../Libraries/itch"
 </script>
 
 <template>
@@ -9,7 +10,7 @@ import axios from "axios"
         <Sidebar />
         <div>
             <header>
-                <h1>Welcome back USERNAME!</h1>
+                <h1>Welcome back {{ itch.getCachedUserInfo()?.username }}!</h1>
             </header>
             <div class="content"> <!-- CONTENT -->
                 <CardRowContainer 
@@ -38,6 +39,7 @@ export default {
     data() {
         return {
             productList: [],
+            userName: "",
         }
     },
     computed: {},

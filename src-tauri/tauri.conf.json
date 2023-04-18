@@ -19,6 +19,15 @@
       "path": {
         "all": true
       },
+      "dialog": {
+        "all": true,
+        "open": true,
+        "save": true
+      },
+      "http": {
+        "all": true,
+        "scope": ["https://itch.io/api/*"]
+      },
       "all": false
     },
     "bundle": {
@@ -55,7 +64,7 @@
       }
     },
     "security": {
-      "csp": null
+      "csp": ""
     },
     "updater": {
       "active": false

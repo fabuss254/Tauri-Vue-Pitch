@@ -130,7 +130,7 @@ a:hover > h2 > i {
     position: relative;
     width: fit-content;
 
-    transition: transform 0.3s ease-out;
+    transition: transform 0.3s cubic-bezier(0.45, 0.05, 0.49, 1.02);
 
     /*max-height: 150px;*/
 }
@@ -149,6 +149,7 @@ a:hover > h2 > i {
 }
 
 .control {
+    height: auto;
     /*height: 100%;*/
     width: 30px;
     background-color: rgb(0, 0, 0);

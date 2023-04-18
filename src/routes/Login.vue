@@ -4,8 +4,8 @@
             <h1>Welcome back !</h1>
             <footer>
                 <form>
-                    <input type="text" placeholder="Username">
-                    <input type="password" placeholder="Password">
+                    <input type="text" placeholder="API Key" ref="keyInput">
+                    <p :style="{display: errorMessage == '' ? 'none' : 'block'}">{{ errorMessage }}</p>
                     <input type="submit" value="Login" @click.prevent="OnClick()">
                 </form>
             </footer>
@@ -14,20 +14,35 @@
 </template>
 
 <script lang="ts">
+import itch from "../Libraries/itch";
 
 export default {
     name: 'Login',
     components: {},
     props: {},
     data() {
-        return {}
+        return {
+            errorMessage: ""
+        }
     },
     computed: {},
     mounted() {
+        
     },
     methods: {
-        OnClick() {
-            this.$router.push('/')
+        async OnClick() {
+            this.errorMessage = "";
+            const key: string = this.$refs.keyInput.value
+            console.log("Entered key", key);
+            itch.setKey(key);
+
+            let userInfo = await itch.getUserInfo();
+            if (!userInfo) {
+                this.errorMessage = "Error: key is invalid";
+                return;
+            }
+
+            this.$router.push('/');
         }
     }
 }
@@ -90,7 +105,16 @@ input[type="submit"] {
     font-weight: bold;
     cursor: pointer;
 
-    margin: 16px 10px 8px;
+    margin: 8px 10px 8px;
+}
+
+p {
+    color: red;
+    text-align: left;
+    margin: 0 15px;
+
+    font-size: 12px;
+    font-weight: bold;
 }
 
 </style>

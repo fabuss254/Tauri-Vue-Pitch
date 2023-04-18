@@ -11,9 +11,9 @@ import Delimiter from "./sub/SidebarDelimiter.vue"
         <Btn btnName="Browse" btnIcon="search" link="/browse"/>
         <Btn btnName="Shop" btnIcon="store"/>
         <Delimiter />
-        <Btn btnName="Settings" btnIcon="settings"/>
-        <Btn btnName="Profile" btnIcon="person"/>
-        <Btn btnName="Logout" btnIcon="logout"/>
+        <Btn btnName="Settings" btnIcon="settings" link="/settings"/>
+        <!--<Btn btnName="Profile" btnIcon="person"/>-->
+        <Btn btnName="Logout" btnIcon="logout" link="/login"/>
         <Delimiter />
         <Btn btnName="About" btnIcon="info"/>
     </div>

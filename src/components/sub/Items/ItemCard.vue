@@ -69,7 +69,8 @@ export default {
 
 .ctn:hover {
     transform: scale(1.05);
-    box-shadow: 0px 4px 2px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 2px 0 rgba(0, 0, 0, 0.5);
+    /*border: solid 2px rgba(0, 0, 0, 0.5);*/
 }
 
 .bg-img {
@@ -152,6 +153,7 @@ h1 {
     padding: 2px 5px;
     border-radius: 0 0 0 10px;
     text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 1);
 
     z-index: 5;
 }
