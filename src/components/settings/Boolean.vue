@@ -29,6 +29,14 @@ export default {
         description: {
             type: String,
             default: "No description"
+        },
+        onChange: {
+            type: Function,
+            default: () => {}
+        },
+        defaultValue: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -38,10 +46,13 @@ export default {
     },
     computed: {},
     mounted() {
+        if (this.defaultValue == null && this.defaultValue == undefined) return;
+        this.value = this.defaultValue;
     },
     methods: {
         async OnClick() {
             this.value = !this.value;
+            this.onChange(this.value);
         }
     }
 }

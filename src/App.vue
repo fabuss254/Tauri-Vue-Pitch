@@ -3,8 +3,8 @@
 </template>
 
 <script lang="ts">
-import { BaseDirectory, createDir, exists, writeTextFile, readTextFile } from "@tauri-apps/api/fs";
 import itch from "./Libraries/itch";
+import Settings from "./Libraries/settings";
 
 export default {
   name: 'App',
@@ -15,18 +15,9 @@ export default {
   },
   computed: {},
   async mounted() {
-    if (!(await exists('fab-pitch', {dir: BaseDirectory.LocalData}))){
-        try {
-            await createDir('fab-pitch', {dir: BaseDirectory.LocalData});
-            writeTextFile('fab-pitch/config.json', JSON.stringify({}), {dir: BaseDirectory.LocalData});
-        } catch(e) {
-            console.log("Error while creating directory", e);
-        }
-    }
+    await Settings.Load();
 
-    let Data = JSON.parse(await readTextFile('fab-pitch/config.json', {dir: BaseDirectory.LocalData}));
-    itch.setKey(Data.key);
-    console.log(itch)
+    itch.setKey(Settings.Get("Token", ""));
     if (await itch.getUserInfo()) {
       this.$router.push('/');
     } else {

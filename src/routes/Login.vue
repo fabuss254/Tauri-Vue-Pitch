@@ -15,6 +15,7 @@
 
 <script lang="ts">
 import itch from "../Libraries/itch";
+import Settings from "../Libraries/settings";
 
 export default {
     name: 'Login',
@@ -27,7 +28,7 @@ export default {
     },
     computed: {},
     mounted() {
-        
+        Settings.Set("Token", "");
     },
     methods: {
         async OnClick() {
@@ -42,6 +43,7 @@ export default {
                 return;
             }
 
+            Settings.Set("Token", key);
             this.$router.push('/');
         }
     }

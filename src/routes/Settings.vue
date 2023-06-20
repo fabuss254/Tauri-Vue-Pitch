@@ -2,6 +2,8 @@
 import Sidebar from "../components/Sidebar.vue"
 import FileLocation from "../components/settings/FileLocation.vue"
 import Boolean from "../components/settings/Boolean.vue";
+import Settings from "../Libraries/settings"
+import { isPermissionGranted, requestPermission, sendNotification } from '@tauri-apps/api/notification';
 </script>
 
 <template>
@@ -15,18 +17,26 @@ import Boolean from "../components/settings/Boolean.vue";
                 <FileLocation 
                     title="File Location"
                     description="Change the location of the file that stores your data."
+                    :defaultValue="Settings.Get('FileLocation', '/')"
+                    :onChange="(value: any) => Settings.Set('FileLocation', value)"
                 />
                 <Boolean
                     title="Auto update"
                     description="Automatically update plugins when a new version is available."
+                    :defaultValue="Settings.Get('AutoUpdate', true)"
+                    :onChange="(value: any) => Settings.Set('AutoUpdate', value)"
                 />
                 <Boolean
                     title="Notifications"
                     description="Notify you when a new version of a plugin is available."
+                    :defaultValue="Settings.Get('Notifications', true)"
+                    :onChange="(value: any) => {Settings.Set('Notifications', value); if (value && HasNotificationPermission) sendNotification({title: 'Notifications enabled', body: 'You will now be notified when a new version of a plugin is available.'})}"
                 />
                 <Boolean
                     title="Tray on close"
                     description="Keep the application running in the background when you close the window."
+                    :defaultValue="Settings.Get('TrayOnClose', false)"
+                    :onChange="(value: any) => Settings.Set('TrayOnClose', value)"
                 />
             </div>
         </div>
@@ -40,10 +50,20 @@ export default {
     components: {},
     props: {},
     data() {
-        return {}
+        return {
+            HasNotificationPermission: false
+        }
     },
     computed: {},
-    mounted() {
+    async mounted() {
+        let permissionGranted = await isPermissionGranted();
+        if (!permissionGranted) {
+            const permission = await requestPermission();
+            console.log(permission)
+            permissionGranted = permission === 'granted';
+        }
+        this.HasNotificationPermission = permissionGranted;
+        console.log(permissionGranted)
     },
     methods: {
         OnClick() {

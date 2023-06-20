@@ -30,6 +30,14 @@ export default {
         description: {
             type: String,
             default: "No description"
+        },
+        onChange: {
+            type: Function,
+            default: () => {}
+        },
+        defaultValue: {
+            type: String,
+            default: false
         }
     },
     data() {
@@ -39,6 +47,8 @@ export default {
     },
     computed: {},
     mounted() {
+        if (this.defaultValue == null && this.defaultValue == undefined) return;
+        this.path = this.defaultValue;
     },
     methods: {
         async OnClick() {
@@ -51,6 +61,7 @@ export default {
 
             if (!selected) return;
             this.path = typeof(selected) == "object" ? selected[0] : selected;
+            this.onChange(this.path);
         }
     }
 }

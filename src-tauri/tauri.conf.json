@@ -24,6 +24,9 @@
         "open": true,
         "save": true
       },
+      "notification": {
+        "all": true
+      },
       "http": {
         "all": true,
         "scope": ["https://itch.io/api/*"]
@@ -45,7 +48,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "com.fab.pitch",
       "longDescription": "",
       "macOS": {
         "entitlements": null,

@@ -1,5 +1,5 @@
 <template>
-    <div class="ctn">
+    <div class="ctn" @click.prevent="OnClick()">
         <h1>{{ Item.plainTitle }}</h1>
         
         <!-- Hide the price tag when it's free -->
@@ -36,6 +36,9 @@ export default {
 
     },
     methods: {
+        OnClick() {
+            this.$router.push(encodeURI('/Item?path=' + this.Item.link))
+        }
     }
 }
 </script>
